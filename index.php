@@ -35,13 +35,41 @@ if ($_GET) {
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+ 
   <title>Crud php y mysql!</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+ <script src="funciones.js"></script> 
+ 
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/bootstrap.min.css"/>
+
+<!-- 
+    RTL version
+-->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/alertify.rtl.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/default.rtl.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/semantic.rtl.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.12.0/build/css/themes/bootstrap.rtl.min.css"/>
 </head>
 
 <body>
+<div id="respuesta"></div>
   <!-- Modal update -->
-  <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -52,29 +80,26 @@ if ($_GET) {
         </div>
         <div class="modal-body">
           <div>
-            <form id="formulario" method="GET" action="editar.php">
+           
               <div class="form-group">
                 <label for="nombre1">Id</label>
-                <input value="<?php echo ($fila['Id']); ?>" name="id1" type="text" class="form-control" id="id">
+                <input value="" name="id1" type="text" class="form-control" id="idu">
               </div>
               <div class="form-group">
                 <label for="nombre1">Nombre</label>
-                <input value="<?php echo ($fila['Nombres']); ?>" name="nombres1" type="text" class="form-control" id="nombre">
+                <input value="" name="nombres1" type="text" class="form-control" id="nombreu">
               </div>
               <div class="form-group">
                 <label for="direccion1">Direccion</label>
-                <input value="<?php echo ($fila['Direccion']); ?>" name="direccion1" type="text" class="form-control" id="direccion" placeholder="Ingresa tu direccion">
+                <input value="" name="direccion1" type="text" class="form-control" id="direccionu" placeholder="Ingresa tu direccion">
               </div>
-              <input class="btn btn-primary" id="enviar" name="guardar" type="submit" value="Guardar datos" />
-            </form>
+             <button type="" id="update"class="btn btn-danger">Guardar cambios</button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+      
       </div>
     </div>
-  </div>
+  </div>  
   <!--fin Modal -->
   <!-- Modal insertar -->
   <div class="modal fade" id="ingresar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -88,7 +113,7 @@ if ($_GET) {
         </div>
         <div class="modal-body">
           <div>
-            <form id="formulario" method="post" action="insertar.php">
+            
               <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre">
@@ -97,108 +122,78 @@ if ($_GET) {
                 <label for="direccion">Direccion</label>
                 <input name="direccion" type="text" class="form-control" id="direccion" placeholder="Ingresa tu direccion">
               </div>
-              <input class="btn btn-primary" id="enviar" name="guardar" type="submit" value="Guardar datos" />
-            </form>
+              <button class="btn btn-primary" id="insertar">Insertar</button>
+              
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+       
       </div>
     </div>
   </div>
+
+  
   <!--fin Modal -->
   <div class="container">
     <div class="row">
 
+
       <div class="col-md-12">
-        <div>
-          <div>
-            <button id="alertabuton">ff</button>
-          <?php
-            if(isset($_SESSION['mensaje'])){?>
-              <div id="alerta" class="alert alert-<?php echo($_SESSION['color']) ?> alert-dismissible fade show" role="alert">
-              <?php echo($_SESSION['mensaje']) ?>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-           <?php session_unset(); }?>
+        <div class="jumbotron mt-2">
 
-          
-          </div>
-          <div class="jumbotron">
+          <h1>Crud php mysql</h1>
+          <p class="lead">Pequeño proyecto de operaciones basicas en php y mysql.</p>
 
-            <h1>Crud php mysql</h1>
-            <p class="lead">Pequeño proyecto de operaciones basicas en php y mysql.</p>
-           
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ingresar">
-              Nuevo Alumno
-            </button>
-            </p>
-          </div>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ingresar">
+            Nuevo Alumno
+          </button>
+          </p>
         </div>
-        <div class="mb-2">
-
-        </div>
-
-
-
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nombres</th>
-              <th scope="col">Direccion</th>
-              <th scope="col">Opciones</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            foreach ($resultado as $fila) {
-              echo '<tr>
-                                    <td> ' . $fila['Id'] . '</td>
-                                    <td> ' . $fila['Nombres'] . '</td>
-                                    <td> ' . $fila['Direccion'] . '</td>
-                                    <td>
-                                    <a class="btn btn-secondary" href="index.php?Id=' . $fila['Id'] . '">
-                                      Seleccionar
-                                    </a>
-
-                                    
-                                    
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editar">
-                                    Actualizar
-                                  </button>
-                                     
-                                  
-
-                                         <a class="btn btn-primary" href="eliminar.php?Id=' . $fila['Id'] . '">Eliminar</a>
-                                        
-                                          
-                                         </td>
-                                  </tr>';
-            }
-            ?>
-
-            <!-- Button trigger modal -->
-
-
-          </tbody>
-        </table>
       </div>
     </div>
+
+    
+
+
+  </div>
+  </div>
   </div>
 
-
+  <div id="tabla">
+      
+      </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ 
+  <!-- para cargar la tabla -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="main.js"> </script>
+  
+  <script>
+  
+    $("#tabla").load("tabla.php");
+  
+</script>
+ <script>
+  $(document).ready(function(){
+    //fila=$(#nombre).val();
+    $("#insertar").click(function(){
+      nombre=$("#nombre").val();
+      direccion=$("#direccion").val();
+      Registrar(nombre,direccion);
+     
+    });
+    $("#update").click(function(){
+      actualizar();
+    });
+ 
+  });
+  
+
+</script>
+
+
 
 </body>
 
