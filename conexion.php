@@ -1,4 +1,5 @@
 <?php
+session_start();
 $link = 'mysql:host=localhost;dbname=crudalumno';
 $usuario ='root';
 $contraseña= '';

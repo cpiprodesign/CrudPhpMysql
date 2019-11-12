@@ -113,11 +113,25 @@ if ($_GET) {
 
       <div class="col-md-12">
         <div>
+          <div>
+            <button id="alertabuton">ff</button>
+          <?php
+            if(isset($_SESSION['mensaje'])){?>
+              <div id="alerta" class="alert alert-<?php echo($_SESSION['color']) ?> alert-dismissible fade show" role="alert">
+              <?php echo($_SESSION['mensaje']) ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+           <?php session_unset(); }?>
+
+          
+          </div>
           <div class="jumbotron">
 
             <h1>Crud php mysql</h1>
             <p class="lead">Pequeño proyecto de operaciones basicas en php y mysql.</p>
-            <hr class="my-4">
+           
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ingresar">
               Nuevo Alumno

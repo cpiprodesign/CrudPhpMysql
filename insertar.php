@@ -9,6 +9,8 @@ if($_POST){
     $sql_agregar = 'INSERT INTO alumnos(Nombres,Direccion)values(?,?)';
     $sentencia_agregar = $pdo->prepare($sql_agregar);
    $resultado = $sentencia_agregar->execute(array($nombre,$direccion));
+   $_SESSION['mensaje']='Alumno registrado';
+   $_SESSION['color']='success';
    header('location:index.php');
     //if($resultado === TRUE) echo "Insertado correctamente";
 //else echo "Algo salió mal. Por favor verifica que la tabla exista";
